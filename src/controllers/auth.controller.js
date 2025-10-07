@@ -9,7 +9,7 @@ exports.signup = (req, res) => {
       res.status(500).json({ error: err });
       return;
     }
-    res.json({ message: "User registered successfully!" });
+    res.status(201).json({ message: "User registered successfully!" });
   });
 };
 
@@ -30,7 +30,11 @@ exports.login = (req, res) => {
       res.status(401).json({ message: "Invalid password" });
       return;
     }
-    req.session.user = { id: user.id, fullname: user.fullname };
+    req.session.user = {
+      id: user.id,
+      fullname: user.fullname,
+      role: user.role,
+    };
     res.json({ message: "Login successful!" });
   });
 };
